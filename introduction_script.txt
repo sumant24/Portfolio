@@ -1,0 +1,8 @@
+[PART 1: Introduction - ~10 Seconds]
+"Hello! I'm Sumant Joshi, an AI Developer and Full-Stack Engineer. I build intelligent, scalable software solutions that bridge AI models with high-performance web apps."
+
+[PART 2: Experience & Education - ~10 Seconds]
+"Currently at Micropro Software, I develop computer vision and machine learning applications. I hold an MCA with honors and also serve as an industry guest speaker."
+
+[PART 3: Passion & Call to Action - ~10 Seconds]
+"I’m passionate about leveraging Generative AI to solve real-world problems. Let’s connect and bring your next tech and software vision to life!"

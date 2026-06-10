@@ -1,0 +1,7 @@
+Hello! I am Sumant Joshi, an AI and Python Developer, AI/ML Engineer, and Full-Stack Developer based in Nagpur, India. I specialize in building intelligent, scalable software solutions that bridge the gap between complex artificial intelligence models and high-performance web applications.
+
+Currently, I work as an AI and Python Developer at Micropro Software Solutions, where I design and deploy Python applications focused on advanced image processing, computer vision, and machine learning workflows. 
+
+Holding a Master of Computer Applications with honors, my expertise spans across Python, Flask, Django, and modern frontend frameworks like React and JavaScript. Beyond development, I have had the privilege of serving as an industry Guest Speaker at G.H. Raisoni Group of Institutions, sharing my insights on Full-Stack Development and AI with the next generation of engineers.
+
+I am passionate about leveraging Generative AI, large language models, and computer vision to solve real-world problems. Whether you are looking to integrate advanced machine learning capabilities or build a modern web platform from scratch, I'm here to bring those visions to life. Let’s connect and build something extraordinary together!

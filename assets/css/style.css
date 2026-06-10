@@ -3769,3 +3769,449 @@ content: var(--tw-content);
     --tw-bg-opacity: 1;
     background-color: rgb(221 221 221 / var(--tw-bg-opacity));
 }
+
+/* ─────────────────────────────────────────────────────────── */
+/*  CUSTOM PORTFOLIO ENHANCEMENTS                              */
+/* ─────────────────────────────────────────────────────────── */
+
+/* Modernized Hero layout enhancements */
+#home .mx-auto.max-w-550 {
+    max-width: 700px !important;
+}
+@media (min-width: 992px) and (max-width: 1100px) {
+    #home .mx-auto.max-w-550 {
+        max-width: 580px !important;
+    }
+}
+#home h1 span.block {
+    min-height: 50px;
+    margin-top: 5px;
+}
+
+/* Typewriter cursor blinking animation */
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.1em;
+    background-color: currentColor;
+    margin-left: 4px;
+    animation: blink-caret 0.75s step-end infinite;
+    vertical-align: middle;
+}
+@keyframes blink-caret {
+    from, to { background-color: transparent }
+    50% { background-color: currentColor; }
+}
+
+/* ── Premium Skills Redesign ── */
+:root { --skill-accent: #4682B4; }
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 48px;
+}
+@media (max-width: 767px) {
+    .skills-grid { grid-template-columns: 1fr; }
+}
+
+.skill-category-label {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--skill-accent);
+    padding: 20px 0 8px;
+    border-bottom: 2px solid var(--skill-accent);
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.skill-item {
+    padding: 11px 0;
+    cursor: default;
+}
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+.skill-name {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0.4px;
+    color: #2c2c2c;
+    transition: color 0.25s;
+}
+.skill-pct {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--skill-accent);
+    letter-spacing: 0.3px;
+    opacity: 0.85;
+    transition: opacity 0.25s;
+}
+
+/* Track */
+.skill-bar-track {
+    height: 6px;
+    background: #e8eef4;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fill — gradient + shimmer glow */
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    width: 0;
+    background: linear-gradient(90deg,
+        #3a6fa0 0%,
+        #4682B4 45%,
+        #6aaad4 75%,
+        #4682B4 100%
+    );
+    background-size: 200% 100%;
+    box-shadow: 0 0 6px rgba(70, 130, 180, 0.45);
+    transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: skillShimmer 2.8s linear infinite;
+    animation-play-state: paused;
+}
+.skill-bar-fill.animated {
+    animation-play-state: running;
+}
+
+@keyframes skillShimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* Hover lift */
+.skill-item:hover .skill-name { color: var(--skill-accent); }
+.skill-item:hover .skill-pct  { opacity: 1; }
+.skill-item:hover .skill-bar-track {
+    box-shadow: 0 2px 10px rgba(70, 130, 180, 0.18);
+}
+.skill-item:hover .skill-bar-fill {
+    box-shadow: 0 0 12px rgba(70, 130, 180, 0.65);
+}
+
+/* ── Speaking & Recognition Card ─────────────────────── */
+.speaking-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #f0f6fc 0%, #ffffff 60%, #eaf3fb 100%);
+    border: 1px solid #d6e8f5;
+    border-radius: 16px;
+    padding: 32px 36px 32px 28px;
+    max-width: 820px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(70, 130, 180, 0.10), 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+}
+.speaking-card:hover {
+    box-shadow: 0 16px 48px rgba(70, 130, 180, 0.18), 0 4px 16px rgba(0,0,0,0.06);
+    transform: translateY(-3px);
+}
+
+/* Gradient left strip */
+.speaking-card__strip {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, #4682B4 0%, #6aaad4 100%);
+    border-radius: 16px 0 0 16px;
+}
+
+/* Floating microphone badge */
+.speaking-card__icon {
+    flex-shrink: 0;
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #4682B4, #6aaad4);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-size: 22px;
+    margin-right: 24px;
+    margin-left: 12px;
+    box-shadow: 0 4px 16px rgba(70, 130, 180, 0.35);
+}
+
+/* Body */
+.speaking-card__body { flex: 1; }
+
+.speaking-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.speaking-card__tag {
+    background: linear-gradient(90deg, #4682B4, #6aaad4);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 20px;
+}
+.speaking-card__year {
+    font-size: 12px;
+    font-weight: 600;
+    color: #9baab8;
+    letter-spacing: 0.5px;
+}
+
+.speaking-card__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a2d3d;
+    margin: 0 0 8px;
+    line-height: 1.4;
+}
+.speaking-card__org {
+    font-size: 13px;
+    color: #4682B4;
+    font-weight: 600;
+    margin: 0 0 12px;
+}
+.speaking-card__desc {
+    font-size: 14px;
+    color: #546778;
+    line-height: 1.7;
+    margin: 0 0 20px;
+}
+
+/* CTA button */
+.speaking-card__btn {
+    display: inline-block;
+    padding: 9px 22px;
+    background: linear-gradient(90deg, #4682B4, #5b9fd4);
+    color: #fff !important;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(70, 130, 180, 0.3);
+    transition: box-shadow 0.25s, transform 0.25s;
+}
+.speaking-card__btn:hover {
+    box-shadow: 0 6px 18px rgba(70, 130, 180, 0.5);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .speaking-card {
+        flex-direction: column;
+        padding: 28px 20px 24px 22px;
+    }
+    .speaking-card__icon {
+        margin: 0 0 16px 10px;
+    }
+    .speaking-card__title { font-size: 16px; }
+}
+
+/* ── Desktop Profile Consolidated Video ───────────────── */
+#hero-video {
+    opacity: 1;
+    z-index: 3;
+}
+
+/* ── Contact Section Links and Counter ────────────────── */
+.contact-email-link,
+.contact-linkedin-link {
+    color: #4682B4 !important;
+    text-transform: none !important;
+}
+
+#msg-char-counter {
+    font-size: 12px;
+    text-align: right;
+    color: #888;
+    margin-top: 6px;
+    padding-right: 10px;
+}
+
+/* ── Additional Margin and Icon Styles ────────────────── */
+.mb-48 {
+    margin-bottom: 48px !important;
+}
+
+.speaking-card__org i {
+    margin-right: 6px !important;
+    opacity: 0.7 !important;
+}
+
+.speaking-card__btn i {
+    margin-right: 7px !important;
+}
+
+/* ── Portfolio Filter Tabs & Slideshow Override ────────── */
+.portfolio-filter-tabs .filter-tab {
+    white-space: nowrap;
+    letter-spacing: 0.8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.portfolio-filter-tabs .filter-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.portfolio-filter-tabs .filter-tab.active {
+    box-shadow: 0 4px 12px rgba(70, 130, 180, 0.3);
+}
+
+@media (max-width: 480px) {
+    .portfolio-filter-tabs .filter-tab {
+        padding: 8px 18px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* Responsive Portfolio Detail Modals Override */
+@media (min-width: 992px) {
+    .portfolio .slideshow ul>li {
+        width: 800px !important;
+        height: 650px !important;
+        left: 50% !important;
+        top: 50% !important;
+        margin-left: -400px !important;
+        margin-top: -325px !important;
+        position: absolute !important;
+    }
+
+    .portfolio .slideshow figure {
+        width: 100% !important;
+        height: 100% !important;
+        background: white !important;
+        padding: 30px !important;
+        overflow-y: auto !important;
+        border-radius: 10px !important;
+    }
+}
+
+@media (min-width: 992px) and (max-height: 710px) {
+    .portfolio .slideshow ul>li {
+        margin-top: 0 !important;
+        top: 5% !important;
+        height: 90% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .portfolio .slideshow ul>li {
+        width: 100% !important;
+        height: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0 !important;
+        position: absolute !important;
+    }
+
+    .portfolio .slideshow figure {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 720px !important;
+        margin: 0 auto !important;
+        padding: 125px 30px 30px !important;
+        overflow-y: auto !important;
+        border-radius: 0 !important;
+        background: white !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .portfolio .slideshow ul>li {
+        width: 100% !important;
+        height: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0 !important;
+        position: absolute !important;
+    }
+
+    .portfolio .slideshow figure {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 85px 20px 20px !important;
+        overflow-y: auto !important;
+        border-radius: 0 !important;
+        background: white !important;
+    }
+}
+
+/* ── Hero Video Container Responsiveness ──────────────── */
+.hero-video-container {
+    position: relative;
+    width: 270px;
+    height: 270px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    border: 4px solid #eee;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 576px) {
+    .hero-video-container {
+        width: 230px;
+        height: 230px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .hero-video-container {
+        position: fixed;
+        width: calc(33.333333% - 80px);
+        height: calc(100vh - 80px);
+        left: 40px;
+        top: 40px;
+        border-radius: 30px;
+        border: none;
+        margin: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* ── Video Unmute Button Overlay ────────────────────── */
+.video-unmute-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.video-unmute-btn:hover {
+    background-color: #4682B4;
+    transform: scale(1.05);
+}
+.video-unmute-btn i {
+    font-size: 13px;
+}

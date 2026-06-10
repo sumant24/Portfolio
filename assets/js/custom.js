@@ -65,9 +65,31 @@
         /*  PORTFOLIO GALLERY
         /* ----------------------------------------------------------- */
 
-        if ($('.gridlist').length) {
-            new CBPGridGallery(document.getElementById('grid-gallery'));
+        if (document.getElementById('ai-projects')) {
+            new CBPGridGallery(document.getElementById('ai-projects'));
         }
+
+        var erpGalleryInitialized = false;
+
+        /* ----------------------------------------------------------- */
+        /*  PORTFOLIO FILTER TABS SWITCHING
+        /* ----------------------------------------------------------- */
+        $('.filter-tab').on('click', function() {
+            $('.filter-tab').removeClass('active bg-accent text-white').addClass('bg-light-grey text-black-6');
+            $(this).addClass('active bg-accent text-white').removeClass('bg-light-grey text-black-6');
+            
+            var target = $(this).data('target');
+            $('.portfolio-gallery-group').hide();
+            
+            $('#' + target).fadeIn(300, function() {
+                if (target === 'erp-projects' && !erpGalleryInitialized) {
+                    if (document.getElementById('erp-projects')) {
+                        new CBPGridGallery(document.getElementById('erp-projects'));
+                        erpGalleryInitialized = true;
+                    }
+                }
+            });
+        });
 
         /* ----------------------------------------------------------- */
         /*  HIDE HEADER WHEN PORTFOLIO SLIDESHOW OPENED
@@ -114,28 +136,9 @@
         }
 
         /* ----------------------------------------------------------- */
-        /*  AJAX CONTACT FORM
+        /*  CONTACT FORM
         /* ----------------------------------------------------------- */
-
-        $("#contactform").on("submit", function() {
-            $("#message").text("Sending...");
-            var form = $(this);
-            $.ajax({
-                url: form.attr("action"),
-                method: form.attr("method"),
-                data: form.serialize(),
-                success: function(result) {
-                    if (result === "success") {
-                        $("#contactform").find(".output_message").addClass("success");
-                        $("#message").text("Message Sent!");
-                    } else {
-                        $("#contactform").find(".output_message").addClass("error");
-                        $("#message").text("Error Sending!");
-                    }
-                }
-            });
-            return false;
-        });
+        /* Handled by assets/js/contact.js via EmailJS (no backend needed) */
 
     });
 
