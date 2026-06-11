@@ -4409,3 +4409,24 @@ content: var(--tw-content);
     margin-bottom: 80px;
     padding-bottom: 40px;
 }
+
+.timeline-row {
+    display: flex;
+    margin-bottom: 40px;
+    gap: 48px;
+}
+
+.timeline-column {
+    flex: 1;
+    width: 50%;
+}
+
+@media (max-width: 991px) {
+    .timeline-row {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .timeline-column {
+        width: 100%;
+    }
+}
