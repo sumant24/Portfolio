@@ -49,31 +49,101 @@
         textarea.dispatchEvent(new Event('input'));
     }
 
-    /* ── Form submit handler ────────────────────────────────────── */
+    /* ── Form elements and validation ──────────────────────────── */
     var form = document.getElementById('contactform');
     var msgSpan = document.getElementById('message');
 
     if (!form) return;
 
+    var nameInput = form.querySelector('[name="name"]');
+    var emailInput = form.querySelector('[name="email"]');
+    var subjectInput = form.querySelector('[name="subject"]');
+    var messageInput = form.querySelector('[name="message"]');
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function validateField(input) {
+        if (!input) return true;
+        var val = input.value.trim();
+        var isValid = true;
+
+        if (input.name === 'name' || input.name === 'message') {
+            isValid = val.length > 0;
+        } else if (input.name === 'email') {
+            isValid = emailRe.test(val);
+        }
+
+        if (isValid) {
+            input.classList.remove('field-error');
+        } else {
+            input.classList.add('field-error');
+        }
+        return isValid;
+    }
+
+    /* Clear validation errors dynamically on typing */
+    var inputsToValidate = [nameInput, emailInput, messageInput];
+    for (var i = 0; i < inputsToValidate.length; i++) {
+        (function (input) {
+            if (!input) return;
+            input.addEventListener('input', function () {
+                if (input.classList.contains('field-error')) {
+                    validateField(input);
+                    // Clear the general error message if all fields are valid now
+                    var hasErrors = false;
+                    for (var j = 0; j < inputsToValidate.length; j++) {
+                        if (inputsToValidate[j] && inputsToValidate[j].classList.contains('field-error')) {
+                            hasErrors = true;
+                            break;
+                        }
+                    }
+                    if (!hasErrors) {
+                        setStatus('', '');
+                    }
+                }
+            });
+        })(inputsToValidate[i]);
+    }
+
+    /* ── Form submit handler ────────────────────────────────────── */
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        /* ── Collect values (mirrors app.py field names) ── */
-        var name = (form.querySelector('[name="name"]').value || '').trim();
-        var email = (form.querySelector('[name="email"]').value || '').trim();
-        var subject = (form.querySelector('[name="subject"]').value || '').trim();
-        var message = (form.querySelector('[name="message"]').value || '').trim();
+        // Run validation
+        var isNameValid = validateField(nameInput);
+        var isEmailValid = validateField(emailInput);
+        var isMessageValid = validateField(messageInput);
 
-        /* ── Validation: same rules as app.py ── */
-        if (!name || !email || !message) {
-            setStatus('error', 'Please fill in Name, Email and Message.');
+        if (!isNameValid || !isEmailValid || !isMessageValid) {
+            var errMsg = 'Please fill in all required fields correctly.';
+            if (nameInput && !nameInput.value.trim()) {
+                errMsg = 'Name is required.';
+            } else if (emailInput && !emailInput.value.trim()) {
+                errMsg = 'Email is required.';
+            } else if (emailInput && !emailRe.test(emailInput.value.trim())) {
+                errMsg = 'Please enter a valid email address.';
+            } else if (messageInput && !messageInput.value.trim()) {
+                errMsg = 'Message is required.';
+            }
+            setStatus('error', errMsg);
+
+            // Focus the first invalid field
+            var firstErr = form.querySelector('.field-error');
+            if (firstErr) firstErr.focus();
             return;
         }
 
-        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRe.test(email)) {
-            setStatus('error', 'Please enter a valid email address.');
-            return;
+        // Validation passed: prepare loader & disable button
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var btnText = submitBtn ? submitBtn.querySelector('span:first-child') : null;
+        var btnIcon = submitBtn ? submitBtn.querySelector('.fa') : null;
+
+        var originalText = btnText ? btnText.textContent : 'send message';
+
+        if (submitBtn) submitBtn.disabled = true;
+        if (btnText) btnText.textContent = 'Sending...';
+        if (btnIcon) {
+            btnIcon.classList.remove('fa-thumbs-o-up');
+            btnIcon.classList.add('fa-spinner', 'fa-spin');
         }
 
         setStatus('', 'Sending…');
@@ -87,22 +157,33 @@
         }) + ' IST';
 
         var templateParams = {
-            from_name: name,
-            from_email: email,
-            subject: subject || 'New Message',
-            message: message,
+            from_name: nameInput.value.trim(),
+            from_email: emailInput.value.trim(),
+            subject: subjectInput.value.trim() || 'New Message',
+            message: messageInput.value.trim(),
             time: timeStr
         };
+
+        function restoreButton() {
+            if (submitBtn) submitBtn.disabled = false;
+            if (btnText) btnText.textContent = originalText;
+            if (btnIcon) {
+                btnIcon.classList.remove('fa-spinner', 'fa-spin');
+                btnIcon.classList.add('fa-thumbs-o-up');
+            }
+        }
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
             .then(function () {
                 setStatus('success', 'Message Sent!');
                 form.reset();
                 if (textarea && counter) textarea.dispatchEvent(new Event('input'));
+                restoreButton();
             })
             .catch(function (err) {
                 console.error('EmailJS error:', err);
                 setStatus('error', 'Error Sending! Please try again.');
+                restoreButton();
             });
     });
 

@@ -4215,3 +4215,197 @@ content: var(--tw-content);
 .video-unmute-btn i {
     font-size: 13px;
 }
+
+/* ── Contact Form Validation and Button Loader ──────── */
+.contactform .field-error {
+    border-color: #e05252 !important;
+    box-shadow: 0 0 0 2px rgba(224, 82, 82, 0.15) !important;
+    background-color: #fffafb !important;
+}
+
+.button:disabled {
+    pointer-events: none !important;
+    opacity: 0.65 !important;
+    cursor: not-allowed !important;
+}
+
+/* ── Personal Infos Responsive Layout & Alignment ──── */
+.personal-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.personal-info-col {
+    width: 100%;
+}
+
+.personal-info-col > div {
+    display: flex;
+    align-items: baseline;
+    padding-bottom: 15px;
+}
+
+.personal-info-col > div:last-child {
+    padding-bottom: 0;
+}
+
+.personal-info-col .info-label {
+    width: 120px;
+    flex-shrink: 0;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.personal-info-col .info-value {
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .personal-info-col {
+        width: 48%;
+    }
+}
+
+@media (max-width: 767px) {
+    .personal-info-col + .personal-info-col {
+        margin-top: 15px;
+    }
+}
+
+/* ── Experience & Education Timeline Redesign ────────── */
+.timeline-list {
+    position: relative;
+    padding-left: 35px;
+    list-style: none;
+}
+
+/* Vertical line */
+.timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #e9ecef;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 35px;
+}
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Timeline marker icon wrapper */
+.timeline-marker {
+    position: absolute;
+    left: -35px;
+    top: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 0 4px #ffffff, 0 3px 8px rgba(0, 0, 0, 0.08);
+    font-size: 13px;
+}
+
+.timeline-item:hover .timeline-marker {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 0 6px #ffffff, 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Timeline card container */
+.timeline-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+}
+
+.timeline-item:hover .timeline-card {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.07);
+    border-color: #d1d5db;
+}
+
+/* Dynamic Top Accent Bar */
+.timeline-accent-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-accent-bar {
+    height: 6px;
+}
+
+/* Inside card formatting styles */
+.timeline-date {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    margin-bottom: 16px;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.timeline-title {
+    font-size: 19px;
+    font-weight: 700;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.timeline-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: none; /* Keep company name normal case */
+}
+
+.timeline-subtitle i {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.timeline-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #4b5563;
+    margin-top: 12px;
+    font-weight: 400;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 14px;
+}
+
+.experience-education-container {
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+}
